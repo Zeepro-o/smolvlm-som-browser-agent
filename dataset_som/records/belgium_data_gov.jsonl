@@ -1,0 +1,1 @@
+{"site": "belgium_data_gov", "image": "dataset_som/images/belgium_data_gov_som.png", "messages": [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": "Select 'submit'"}]}, {"role": "assistant", "content": [{"type": "text", "text": "{\"action\": \"click\", \"element_id\": 1}"}]}]}

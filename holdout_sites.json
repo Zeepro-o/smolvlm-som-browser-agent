@@ -1,0 +1,8 @@
+[
+  {"name": "cern_opendata", "url": "https://opendata.cern.ch/", "category": "research_repository"},
+  {"name": "london_datastore", "url": "https://data.london.gov.uk/", "category": "government"},
+  {"name": "nyc_opendata", "url": "https://opendata.cityofnewyork.us/", "category": "government"},
+  {"name": "chicago_data", "url": "https://data.cityofchicago.org/", "category": "government"},
+  {"name": "protein_data_bank", "url": "https://www.rcsb.org/", "category": "bio_health"},
+  {"name": "noaa_climate", "url": "https://www.climate.gov/", "category": "geospatial_earth_science"}
+]

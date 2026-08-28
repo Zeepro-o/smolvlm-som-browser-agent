@@ -1,0 +1,23 @@
+# Core ML stack
+# NOTE: install torch FIRST using the command from https://pytorch.org/get-started/locally/
+# matching your CUDA version -- a blind `pip install torch` can grab a build that
+# doesn't support newer GPUs (e.g. RTX 50-series/Blackwell) or lacks CUDA at all.
+# Once torch is installed correctly, the rest of this file is safe to pip install.
+torch
+torchvision
+transformers
+accelerate        # required by Trainer + bitsandbytes device placement, not imported directly
+peft
+bitsandbytes
+datasets
+sentencepiece      # some tokenizers need this even when not imported explicitly
+
+# Vision / image handling
+pillow
+
+# Browser automation (capture_som_dataset.py, test_agent.py)
+playwright
+# after `pip install playwright`, also run: playwright install chromium
+
+# --- for exact reproducibility, replace the above with pinned versions from:
+#     pip freeze | grep -iE "torch|transformers|peft|bitsandbytes|accelerate|playwright|pillow|datasets|sentencepiece"

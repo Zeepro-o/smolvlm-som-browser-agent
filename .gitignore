@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Virtual environments
+vlm-env/
+venv/
+.venv/
+env/
+
+# Datasets & captured screenshots (regenerate via capture_som_dataset.py)
+dataset_som/images/
+dataset_som_holdout/images/
+
+# Eval outputs (regenerate via eval_offline.py / test_agent.py)
+eval_results/
+eval_offline_report.json
+*_som.png
+*_predicted.png
+
+# Model weights & training checkpoints (large, regenerable via train_som_qlora.py)
+# Recommendation: push the final adapter to the Hugging Face Hub instead of git,
+# and link it from the README -- keeps this repo small and is the more standard
+# place for model weights to live. Delete the lines below if you'd rather commit
+# the adapter directly (it's small, ~tens of MB, so plain git works fine too).
+som_smolvlm_lora_adapter/
+som_smolvlm_lora_adapter_*/
+checkpoint-*/
+
+# Secrets -- never commit these
+.env
+*.token
+hf_token*
+HF_TOKEN*
+
+# OS / editor cruft
+.DS_Store
+.vscode/
+*.swp

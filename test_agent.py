@@ -215,18 +215,18 @@ async def execute_action_on_page(page, element: dict, action: dict) -> dict:
 
 def load_model():
     print("⏳ Loading processor and base model in 4-bit...")
-    # Deliberately identical to the training config (no llm_int8_skip_modules).
-    # The adapter's weights were optimized against gradients computed with a
-    # fully-4-bit-quantized base, so evaluating with a different quantization
-    # setup (e.g. skipping quant on vision/connector/lm_head) introduces a
-    # train/inference mismatch and confounds "is my model good" -- if you
-    # want to adopt skip-modules, do it for training AND inference together
-    # on the next run, not just here.
+    # Must match train_som_qlora.py's BitsAndBytesConfig exactly. The adapter's
+    # weights were optimized against gradients computed with THIS quantization
+    # setup (vision/connector/lm_head excluded from 4-bit) -- evaluating with a
+    # different setup introduces a train/inference mismatch and confounds
+    # "is my model good". If you change this in train_som_qlora.py, change it
+    # here and in eval_offline.py too, in the same commit.
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=torch.bfloat16,
         bnb_4bit_use_double_quant=True,
+        llm_int8_skip_modules=["vision", "connector", "projector", "lm_head"],
     )
 
     processor = AutoProcessor.from_pretrained(MODEL_ID)

@@ -57,7 +57,8 @@ def load_model():
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=torch.bfloat16,
         bnb_4bit_use_double_quant=True,
-    )  # same config as training -- see test_agent.py for why this matters
+        llm_int8_skip_modules=["vision", "connector", "projector", "lm_head"],
+    )  # must match train_som_qlora.py exactly -- see test_agent.py's load_model() for why
 
     processor = AutoProcessor.from_pretrained(MODEL_ID)
     if processor.tokenizer.pad_token is None:

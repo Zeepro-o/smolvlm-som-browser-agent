@@ -1,60 +1,64 @@
 import os
 import re
+import argparse
 import torch
 from datasets import load_dataset
 from PIL import Image
 from transformers import (
     AutoProcessor,
     AutoModelForImageTextToText,
-    BitsAndBytesConfig,
     TrainingArguments,
     Trainer,
     set_seed,
 )
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
-# ----------------------------------------------------------------------------
-# 0. Reproducibility
-# ----------------------------------------------------------------------------
-SEED = 42
-set_seed(SEED)
+from som_common import MODEL_ID, get_bnb_config
 
 # ----------------------------------------------------------------------------
-# 1. Configuration & Paths
+# 0. CLI args -- parameterized so a retrain can never again silently overwrite
+#    a previous adapter (run 2 overwrote run 1's weights this way once already)
+#    and so epoch checkpoints land somewhere eval_offline.py/test_agent.py can
+#    be pointed at individually via --adapter-path.
 # ----------------------------------------------------------------------------
-MODEL_ID = "HuggingFaceTB/SmolVLM-Instruct"
-DATASET_PATH = "dataset_som/train_dataset.jsonl"
-OUTPUT_DIR = "./som_smolvlm_lora_adapter"
+parser = argparse.ArgumentParser(description="QLoRA fine-tune for the SoM grounding adapter")
+parser.add_argument("--dataset", type=str, default="dataset_som/train_dataset.jsonl")
+parser.add_argument("--output-dir", type=str, required=True,
+                     help="e.g. ./som_smolvlm_lora_adapter_v3 -- always use a NEW dir per retrain")
+parser.add_argument("--epochs", type=int, default=3,
+                     help="Bumped default 2->3: with per-epoch checkpoints + eval_offline.py --adapter-path, "
+                          "there's no downside to training a bit longer and empirically checking which "
+                          "epoch's held-out accuracy is actually best, instead of guessing from training "
+                          "loss alone (which reflects fit to seen data, not generalization).")
+parser.add_argument("--seed", type=int, default=42)
+args = parser.parse_args()
+
+# ----------------------------------------------------------------------------
+# 0b. Reproducibility
+# ----------------------------------------------------------------------------
+set_seed(args.seed)
+
+DATASET_PATH = args.dataset
+OUTPUT_DIR = args.output_dir
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ----------------------------------------------------------------------------
-# 2. 4-Bit Quantization Config (QLoRA)
-#    FIX: skip the vision tower / connector / lm_head from 4-bit quantization.
-#    Quantizing the vision encoder tends to hurt visual grounding quality far
-#    more than it saves VRAM (it's already small relative to the LLM).
-#    If you hit OOM on your 8GB card, you can drop "vision" from this list
-#    to quantize it too, at some cost to image understanding quality.
+# 1. 4-Bit Quantization Config (QLoRA)
+#    Shared with test_agent.py / eval_offline.py via som_common.get_bnb_config()
+#    -- this is what prevents the train/inference config drift that already
+#    caused one silent bug in this project (see som_common.py docstring).
 # ----------------------------------------------------------------------------
-bnb_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_quant_type="nf4",
-    bnb_4bit_compute_dtype=torch.bfloat16,
-    bnb_4bit_use_double_quant=True,
-    llm_int8_skip_modules=["vision", "connector", "projector", "lm_head"],
-)
+bnb_config = get_bnb_config()
 
 # ----------------------------------------------------------------------------
-# 3. Load Processor & Model
+# 2. Load Processor & Model
 # ----------------------------------------------------------------------------
 print("⏳ Loading processor and base model in 4-bit...")
 processor = AutoProcessor.from_pretrained(MODEL_ID)
 
-# FIX: ensure a pad token exists (some causal LM tokenizers have none by default)
 if processor.tokenizer.pad_token is None:
     processor.tokenizer.pad_token = processor.tokenizer.eos_token
 
-# FIX: right-padding is what you want for training with this label-masking scheme
-# (left-padding is the generation-time convention, not the training one)
 processor.tokenizer.padding_side = "right"
 
 model = AutoModelForImageTextToText.from_pretrained(
@@ -64,21 +68,23 @@ model = AutoModelForImageTextToText.from_pretrained(
     device_map="auto",
 )
 
-# FIX: required alongside gradient checkpointing, otherwise you'll get
-# incorrect/no gradients or a runtime warning about incompatible caching
 model.config.use_cache = False
 
 # ----------------------------------------------------------------------------
-# 4. Prepare Model for LoRA
+# 3. Prepare Model for LoRA
 # ----------------------------------------------------------------------------
 model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
 
-# FIX: target only the language-model attention projections, not the vision
-# encoder's (SigLIP attention layers are also named q_proj/k_proj/v_proj/o_proj,
-# so the original plain string list was silently also adapting vision weights).
-# The negative lookahead excludes any module whose full dotted path contains
-# "vision", regardless of what the vision submodule happens to be called.
-TARGET_MODULES_REGEX = r"^(?!.*vision).*(?:q_proj|k_proj|v_proj|o_proj)$"
+# Target LM attention AND MLP/feed-forward projections, not just attention.
+# The original QLoRA paper's own ablations found adapting all linear layers
+# meaningfully outperforms attention-only at a still-small parameter cost --
+# attention-only was leaving representational capacity on the table for
+# mapping visual tokens to discrete element-ID tokens. Vision encoder excluded
+# via the same negative-lookahead as before (SigLIP names attention layers
+# q_proj/k_proj/v_proj/o_proj too, but its MLP layers are fc1/fc2, so this
+# doesn't accidentally pull in vision weights -- verified via the printed
+# module list below; check it after any transformers/model version change).
+TARGET_MODULES_REGEX = r"^(?!.*vision).*(?:q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)$"
 
 matched_modules = [
     name for name, module in model.named_modules()
@@ -103,7 +109,7 @@ model = get_peft_model(model, peft_config)
 model.print_trainable_parameters()
 
 # ----------------------------------------------------------------------------
-# 5. Load Dataset
+# 4. Load Dataset
 # ----------------------------------------------------------------------------
 print("⏳ Loading dataset...")
 dataset = load_dataset("json", data_files=DATASET_PATH, split="train")
@@ -132,13 +138,9 @@ def process_example(item):
             "response so it can be used as the training target."
         )
 
-    # Full conversation, exactly as the model should learn to produce it.
     full_text = processor.apply_chat_template(
         messages, tokenize=False, add_generation_prompt=False
     )
-    # Everything up to (and including) the "it's your turn, assistant" cue,
-    # but WITHOUT the assistant's actual answer. This is a token-for-token
-    # prefix of full_text for standard chat templates.
     prompt_text = processor.apply_chat_template(
         messages[:-1], tokenize=False, add_generation_prompt=True
     )
@@ -153,7 +155,7 @@ def process_example(item):
     prompt_len = prompt_inputs["input_ids"].shape[1]
 
     labels = input_ids.clone()
-    labels[:prompt_len] = -100  # mask everything except the assistant's answer
+    labels[:prompt_len] = -100
 
     return {
         "input_ids": input_ids,
@@ -181,8 +183,6 @@ def collate_fn(batch):
         labels.append(
             torch.cat([ex["labels"], torch.full((pad_len,), -100, dtype=torch.long)])
         )
-        # Assumes one image per example, all resized to the same shape by the
-        # processor (true for SmolVLM's default fixed-size preprocessing).
         pixel_values.append(ex["pixel_values"])
 
     return {
@@ -194,15 +194,12 @@ def collate_fn(batch):
 
 
 # ----------------------------------------------------------------------------
-# 6. Training Arguments — tuned for an 8GB VRAM card
+# 5. Training Arguments -- tuned for an 8GB VRAM card
 # ----------------------------------------------------------------------------
 PER_DEVICE_BATCH_SIZE = 1
 GRAD_ACCUM_STEPS = 8
-NUM_EPOCHS = 2
+NUM_EPOCHS = args.epochs
 
-# FIX: some transformers builds (notably recent dev/main installs) don't
-# expose `warmup_ratio` on TrainingArguments. `warmup_steps` is the older,
-# universally-supported equivalent, so compute the same ~5% warmup manually.
 effective_batch_size = PER_DEVICE_BATCH_SIZE * GRAD_ACCUM_STEPS
 steps_per_epoch = max(1, len(dataset) // effective_batch_size)
 total_steps = steps_per_epoch * NUM_EPOCHS
@@ -217,20 +214,20 @@ training_args = TrainingArguments(
     num_train_epochs=NUM_EPOCHS,
     logging_steps=10,
     save_strategy="epoch",
-    save_total_limit=2,  # FIX: avoid filling the disk with per-epoch checkpoints
+    save_total_limit=NUM_EPOCHS,  # keep every epoch's checkpoint (not just last 2) for per-epoch eval
     bf16=True,
     optim="paged_adamw_8bit",
     warmup_steps=warmup_steps,
     lr_scheduler_type="cosine",
     remove_unused_columns=False,
     report_to="none",
-    seed=SEED,
-    gradient_checkpointing=True,  # FIX: essential for fitting an 8GB card
+    seed=args.seed,
+    gradient_checkpointing=True,
     gradient_checkpointing_kwargs={"use_reentrant": False},
 )
 
 # ----------------------------------------------------------------------------
-# 7. Trainer Initialization
+# 6. Trainer Initialization
 # ----------------------------------------------------------------------------
 trainer = Trainer(
     model=model,
@@ -239,13 +236,15 @@ trainer = Trainer(
     data_collator=collate_fn,
 )
 
-print("\n🚀 Starting QLoRA Training on RTX 5050...")
+print(f"\n🚀 Starting QLoRA Training -> {OUTPUT_DIR} ({NUM_EPOCHS} epochs)...")
 trainer.train()
 
 # ----------------------------------------------------------------------------
-# 8. Save Final Adapter
+# 7. Save Final Adapter
 # ----------------------------------------------------------------------------
 print(f"\n💾 Saving fine-tuned LoRA adapter to {OUTPUT_DIR}...")
 trainer.model.save_pretrained(OUTPUT_DIR)
 processor.save_pretrained(OUTPUT_DIR)
 print("✅ Training complete!")
+print(f"\nPer-epoch checkpoints are under {OUTPUT_DIR}/checkpoint-*/")
+print("Compare them with: python eval_offline.py --data <holdout>.jsonl --adapter-path <checkpoint dir>")

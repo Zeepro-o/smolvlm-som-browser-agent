@@ -1,0 +1,1696 @@
+{
+  "summary": {
+    "n": 96,
+    "json_valid_rate": 1.0,
+    "action_match_rate": 1.0,
+    "element_id_match_rate": 0.4895833333333333,
+    "coord_error_px_median": null,
+    "coord_error_px_mean": null,
+    "by_site": {
+      "cern_opendata": {
+        "n": 21,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.38095238095238093,
+        "action_match_rate": 1.0
+      },
+      "chicago_data": {
+        "n": 13,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.3076923076923077,
+        "action_match_rate": 1.0
+      },
+      "london_datastore": {
+        "n": 13,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.5384615384615384,
+        "action_match_rate": 1.0
+      },
+      "noaa_climate": {
+        "n": 15,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.4666666666666667,
+        "action_match_rate": 1.0
+      },
+      "nyc_opendata": {
+        "n": 12,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.6666666666666666,
+        "action_match_rate": 1.0
+      },
+      "protein_data_bank": {
+        "n": 22,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.5909090909090909,
+        "action_match_rate": 1.0
+      }
+    }
+  },
+  "results": [
+    {
+      "site": "cern_opendata",
+      "instruction": "Tap 'Data Science'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 20}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 20
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 20
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'Get started'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 21
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Click on 'Search'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 3}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 3
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'collision datasets'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 4}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 4
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Press the 'keywords:education' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 5}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 5
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'JADE'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 15
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'ALICE'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 19}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 11
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 19
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Tap 'OPERA'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 19}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 17
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 19
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'Login'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'documentation'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'TOTEM'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 19
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Tap 'PHENIX'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 18
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'datasets'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 4}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 4
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Search using 'search'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 2, \"value\": \"satellite imagery\"}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 2,
+        "value": "climate change"
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 2,
+        "value": "satellite imagery"
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Click on 'DELPHI'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 19}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 14
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 19
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'LHCb'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 19}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 16
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 19
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Tap 'CMS'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 13
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'software'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'energy:7TeV'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'ATLAS'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 19}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 19
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Click on 'environments'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Choose 'Sign In'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 9}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 9
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Click on 'Feedback'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 5}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 5
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Choose 'Github'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Type into 'Search to find a specific dataset...'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 3, \"value\": \"biodiversity dataset\"}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 13,
+        "value": "biodiversity dataset"
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 3,
+        "value": "biodiversity dataset"
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Choose 'search'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Tap 'Chicago Data Portal'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Select 'X Profile'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Press the 'Tutorial' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Click on 'NEXT'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Click on 'Pause carousel'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Tap 'YouTube Profile'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Choose 'Browse'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 2}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 2
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 2
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Click on 'PREVIOUS'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 11
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Tap 'People'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 4}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 4
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Select 'Set cookie preferences'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Blog'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Choose 'Go to login'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 2
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Choose 'Pause ticker'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 12}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 13
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 12
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Press the 'About' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Area Profiles'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Data'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 3}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 3
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Search using 'Search...'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 11, \"value\": \"renewable energy statistics\"}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 11,
+        "value": "Earth observation data"
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 11,
+        "value": "renewable energy statistics"
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Tap 'Places'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 5}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 5
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Choose 'Show popup'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 11}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 11
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Economy'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 5}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 5
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Insights'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 7}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 7
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Click on 'National Oceanic and Atmospheric Administration'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 7}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 7
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Select 'Here\u2019s how you know'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Tap 'Help improve this site'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 15}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 15
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 15
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Choose 'News and stories'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 14
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Choose 'Tools'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Tap 'Funding opportunities'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 2}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 2
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Select 'News'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 2
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Select 'Collaborations and partnerships'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 11}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 11
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 11
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Press the 'Tools and resources' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 13
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Press the 'U.S. Department of Commerce' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Enter a search query into 'Search NOAA sites'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 9, \"value\": \"satellite imagery\"}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 9,
+        "value": "biodiversity dataset"
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 9,
+        "value": "satellite imagery"
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Tap 'Data'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Enter a search query into 'Search'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 9, \"value\": \"climate change\"}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 10,
+        "value": "biodiversity dataset"
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 9,
+        "value": "climate change"
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Choose 'National Oceanic and Atmospheric Administration home'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 7}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 7
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Press the 'About' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 2}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 2
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Click on 'Search all NYC.gov websites'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 2}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 2
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 2
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Type into 'Search Open Data for things like 311, Buildings, Trees'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 11, \"value\": \"climate change\"}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 11,
+        "value": "climate change"
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 11,
+        "value": "climate change"
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Tap 'Learn'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 6}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 6
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Select 'sign up for the NYC Open Data mailing list'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 9}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 9
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Select 'Attend a training class'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 9}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 9
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Tap 'Data'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 4}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 4
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Click on 'Sign In'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 11}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 11
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Choose 'About'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Choose 'Home'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 3}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 3
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Select 'Watch recordings from 2026 and past Open Data Weeks'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 12}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 12
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Tap 'Contact Us'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 7}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 7
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Choose '311'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'Computed Structure Models (CSM)'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 14}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 32
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 14
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Search using 'Enter search term(s), Ligand ID or sequence'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 15, \"value\": \"biodiversity dataset\"}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 15,
+        "value": "renewable energy statistics"
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 15,
+        "value": "biodiversity dataset"
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Tap 'PDB Beta Archive'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 21}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 21
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 21
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'Publications'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 35}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 36
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 35
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Tap 'Advanced Search'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 17
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'COVID-19'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 20}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 20
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'Integrative 3D Structures'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 31}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 31
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 31
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'Browse Annotations'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 19}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 19
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 19
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'RCSB PDB'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Tap '259,129'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 25}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 13
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 25
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Press the '1,062,058' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 14}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 14
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 14
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'News'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 35}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 35
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 35
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Press the 'Wed Aug 26 2026' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 34}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 34
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 34
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Tap 'Include\u00a0 CSM'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 16}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 16
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 16
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'MyPDB'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 21}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 21
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Press the 'Chemical Search' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 18
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'About'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'Careers'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 9}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 9
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Choose 'Histone Ubiquitination and Deubiquitination Complexes'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 33
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Choose 'RCSB Protein Data Bank (RCSB PDB)'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 2}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 29
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 2
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Press the 'Protein Data Bank (PDB)' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 2}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 30
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 2
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": null
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'Welcome'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 22}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 22
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 22
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": null
+    }
+  ]
+}

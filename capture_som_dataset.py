@@ -43,7 +43,12 @@ from collections import defaultdict
 from urllib.parse import urlparse
 from urllib.robotparser import RobotFileParser
 
-from playwright.async_api import async_playwright, TimeoutError as PWTimeoutError
+from playwright.async_api import async_playwright
+
+from som_common import (
+    VIEWPORT, USER_AGENT, NAV_TIMEOUT_MS, EXTRA_WAIT_MS, RETRY_WAIT_MS,
+    SOM_INJECTION_SCRIPT, dedupe_ambiguous, dismiss_consent_banners, load_and_tag,
+)
 
 # --------------------------------------------------------------------------
 # Config
@@ -57,27 +62,12 @@ SITES_CONFIG = Path(__file__).parent / "sites.json"
 
 DEFAULT_CONCURRENCY = 8          # total pages in flight at once
 PER_HOST_CONCURRENCY = 2         # max concurrent pages hitting the same domain
-MAX_RECORDS_PER_SITE = 20        # cap so a handful of complex sites don't dominate the dataset
-NAV_TIMEOUT_MS = 25_000
-EXTRA_WAIT_MS = 2_500            # settle time after DOMContentLoaded, first attempt
-RETRY_WAIT_MS = 6_000            # longer settle time used only on the zero-elements retry
+# Raised from 20 -> 40. At 20, a 12-element sparse site and a 35-element dense
+# site both contributed roughly the same number of records, which skews the
+# whole corpus toward low element_ids (most sites are sparse) and is the main
+# suspected cause of the model's low-ID "collapse" bias on dense pages.
+MAX_RECORDS_PER_SITE = 40
 REQUEST_JITTER_S = (0.2, 1.2)    # small randomized delay before each navigation
-
-USER_AGENT = (
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 SoMDatasetBot/1.0"
-)
-
-CONSENT_SELECTORS = [
-    "button:has-text('Accept All')",
-    "button:has-text('Accept all')",
-    "button:has-text('Accept')",
-    "button:has-text('I Agree')",
-    "button:has-text('Allow all')",
-    "button:has-text('Got it')",
-    "#onetrust-accept-btn-handler",
-    "[aria-label='Accept cookies']",
-]
 
 PROMPT_TEMPLATES_CLICK = [
     "Click on '{label}'",
@@ -103,94 +93,8 @@ TYPE_VALUES = [
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger("som_capture")
 
-# JavaScript snippet that injects Set-of-Marks overlays into the live page.
-SOM_INJECTION_SCRIPT = """
-() => {
-    const existing = document.querySelectorAll('.som-overlay-badge, .som-overlay-box');
-    existing.forEach(el => el.remove());
-
-    const interactiveSelectors = [
-        'button', 'a', 'input', 'select', 'textarea',
-        '[role="button"]', '[role="link"]', '[role="checkbox"]',
-        '[role="menuitem"]', '[role="tab"]', '[onclick]'
-    ];
-
-    const elements = Array.from(document.querySelectorAll(interactiveSelectors.join(',')));
-    const items = [];
-    let count = 0;
-
-    elements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-
-        if (rect.width < 12 || rect.height < 12) return;
-        if (rect.top < 0 || rect.top > window.innerHeight) return;
-        if (rect.left < 0 || rect.left > window.innerWidth) return;
-
-        const style = window.getComputedStyle(el);
-        if (style.visibility === 'hidden' || style.display === 'none' || style.opacity === '0') return;
-
-        const rawText = (el.innerText || el.getAttribute('placeholder') || el.getAttribute('aria-label') || el.getAttribute('title') || el.value || '').trim();
-        if (!rawText || rawText.length < 2 || rawText.length > 60) return;
-
-        // Occlusion check: is this element (or an ancestor/descendant of the element
-        // actually hit) the topmost thing at its own center point? Without this,
-        // elements hidden behind cookie banners/modals still get tagged as clickable
-        // -- and across 200 different sites, some kind of overlay is close to guaranteed.
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const topEl = document.elementFromPoint(cx, cy);
-        if (!topEl || (!el.contains(topEl) && !topEl.contains(el))) return;
-
-        count += 1;
-
-        const box = document.createElement('div');
-        box.className = 'som-overlay-box';
-        box.style.position = 'fixed';
-        box.style.left = `${rect.left}px`;
-        box.style.top = `${rect.top}px`;
-        box.style.width = `${rect.width}px`;
-        box.style.height = `${rect.height}px`;
-        box.style.border = '2px solid #00FF66';
-        box.style.backgroundColor = 'rgba(0, 255, 102, 0.08)';
-        box.style.pointerEvents = 'none';
-        box.style.zIndex = '999998';
-        document.body.appendChild(box);
-
-        const badge = document.createElement('div');
-        badge.className = 'som-overlay-badge';
-        badge.innerText = `[${count}]`;
-        badge.style.position = 'fixed';
-        badge.style.left = `${Math.max(0, rect.left)}px`;
-        badge.style.top = `${Math.max(0, rect.top - 18)}px`;
-        badge.style.backgroundColor = '#00FF66';
-        badge.style.color = '#000000';
-        badge.style.fontSize = '12px';
-        badge.style.fontWeight = 'bold';
-        badge.style.fontFamily = 'monospace';
-        badge.style.padding = '1px 4px';
-        badge.style.borderRadius = '3px';
-        badge.style.boxShadow = '0 0 4px rgba(0,0,0,0.8)';
-        badge.style.pointerEvents = 'none';
-        badge.style.zIndex = '999999';
-        document.body.appendChild(badge);
-
-        items.push({
-            id: count,
-            tag: el.tagName.toLowerCase(),
-            type: el.getAttribute('type') || null,
-            text: rawText.slice(0, 80),
-            role: el.getAttribute('role') || null,
-            bbox: {
-                x: Math.round(rect.left), y: Math.round(rect.top),
-                width: Math.round(rect.width), height: Math.round(rect.height)
-            },
-            center: { x: Math.round(cx), y: Math.round(cy) }
-        });
-    });
-
-    return items;
-}
-"""
+# SOM_INJECTION_SCRIPT now lives in som_common.py (imported above) so it's
+# guaranteed identical to what test_agent.py/eval_offline.py use at inference.
 
 
 def safe_name(name: str) -> str:
@@ -259,33 +163,23 @@ async def is_allowed(request_ctx, url: str, robots_cache: dict, robots_locks: di
 # --------------------------------------------------------------------------
 # Per-site pipeline
 # --------------------------------------------------------------------------
-
-async def dismiss_consent_banners(page) -> str | None:
-    """Best-effort dismissal of cookie/consent overlays so they don't occlude content."""
-    for selector in CONSENT_SELECTORS:
-        try:
-            await page.locator(selector).first.click(timeout=1200)
-            await page.wait_for_timeout(300)
-            return selector
-        except Exception:
-            continue
-    return None
-
-
-async def load_and_tag(page, url: str, settle_ms: int) -> list:
-    await page.goto(url, wait_until="domcontentloaded", timeout=NAV_TIMEOUT_MS)
-    try:
-        await page.wait_for_load_state("networkidle", timeout=8000)
-    except PWTimeoutError:
-        pass  # persistent background traffic shouldn't block the whole run
-    await dismiss_consent_banners(page)
-    await page.wait_for_timeout(settle_ms)
-    return await page.evaluate(SOM_INJECTION_SCRIPT)
+# dismiss_consent_banners / load_and_tag now live in som_common.py (imported
+# above), shared with test_agent.py so live inference sees the same page
+# state as training data was captured under.
 
 
 def build_records(site_name: str, screenshot_path: Path, tagged_elements: list) -> list:
     records = []
-    candidates = tagged_elements.copy()
+    # Drop elements that share (tag, text) with another element on the same
+    # page before sampling -- e.g. two identically-labeled "Search" buttons
+    # are indistinguishable by instruction text alone, so either one entering
+    # the dataset teaches a contradictory instruction -> element_id mapping.
+    unambiguous = dedupe_ambiguous(tagged_elements)
+    dropped = len(tagged_elements) - len(unambiguous)
+    if dropped:
+        log.info(f"[{site_name}] dropped {dropped} ambiguous (duplicate tag+text) elements")
+
+    candidates = unambiguous.copy()
     random.shuffle(candidates)  # so the cap below is a random sample, not just the first N in DOM order
 
     for el in candidates[:MAX_RECORDS_PER_SITE]:
@@ -333,7 +227,7 @@ async def process_site(
         await asyncio.sleep(random.uniform(*REQUEST_JITTER_S))  # light politeness stagger
 
         context = await browser.new_context(
-            viewport={"width": 1280, "height": 800},
+            viewport=VIEWPORT,
             user_agent=USER_AGENT,
             locale="en-US",
         )

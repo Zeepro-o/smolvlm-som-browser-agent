@@ -10,8 +10,14 @@ Loads the base model + LoRA adapter ONCE, then runs it against a list of
   - asks the model to predict an action
   - resolves the predicted element_id back to a real tagged element
   - draws the predicted target on the screenshot so you can eyeball it
-  - optionally (--execute) actually clicks/types it via Playwright and
-    reports whether the page changed
+  - optionally (--execute) actually clicks/types it via Playwright, checks
+    whether the URL or the visible element set changed afterward, and -- if
+    nothing changed -- asks the model again for a different element, up to
+    --max-attempts tries. This is a verified-retry loop, not a one-shot
+    click: a single ~50% one-shot grounding accuracy compounds into a much
+    higher effective task-completion rate across a few cheap retries, since
+    "did the click do anything" is easy to check and most instructions have
+    more than one plausible target if the first guess misses.
 
 IMPORTANT: the default test cases below are sites that are NOT in the
 sites.json used to build the training set. `data.nasa.gov` (used in the
@@ -21,7 +27,8 @@ your own held-out sites if you've since edited sites.json.
 
 Usage:
     python test_agent.py                       # print-only, default cases
-    python test_agent.py --execute              # also click the prediction
+    python test_agent.py --execute              # click + verify + retry on miss
+    python test_agent.py --execute --max-attempts 5
     python test_agent.py --cases my_cases.json  # your own [{url, instruction}, ...]
 """
 
@@ -37,31 +44,15 @@ import torch
 from PIL import Image, ImageDraw
 from peft import PeftModel
 from playwright.async_api import async_playwright
-from transformers import AutoProcessor, AutoModelForImageTextToText, BitsAndBytesConfig
+from transformers import AutoProcessor, AutoModelForImageTextToText
 
-MODEL_ID = "HuggingFaceTB/SmolVLM-Instruct"
-ADAPTER_PATH = "./som_smolvlm_lora_adapter"
+from som_common import (
+    MODEL_ID, DEFAULT_ADAPTER_PATH, VIEWPORT, USER_AGENT, NAV_TIMEOUT_MS, EXTRA_WAIT_MS,
+    RETRY_WAIT_MS, SOM_INJECTION_SCRIPT, get_bnb_config, load_and_tag,
+)
+
+ADAPTER_PATH = DEFAULT_ADAPTER_PATH
 OUTPUT_DIR = Path("eval_results")
-
-VIEWPORT = {"width": 1280, "height": 800}          # must match training capture
-USER_AGENT = (
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 SoMDatasetBot/1.0"
-)  # matches the UA used to build the training set, to keep rendering consistent
-NAV_TIMEOUT_MS = 25_000
-EXTRA_WAIT_MS = 2_500
-RETRY_WAIT_MS = 6_000
-
-CONSENT_SELECTORS = [
-    "button:has-text('Accept All')",
-    "button:has-text('Accept all')",
-    "button:has-text('Accept')",
-    "button:has-text('I Agree')",
-    "button:has-text('Allow all')",
-    "button:has-text('Got it')",
-    "#onetrust-accept-btn-handler",
-    "[aria-label='Accept cookies']",
-]
 
 # Genuinely unseen sites (not in the 38-site sites.json starter) -- adjust
 # the instruction wording once you see what's actually tagged on each page.
@@ -71,115 +62,10 @@ TEST_CASES = [
     {"url": "https://opendata.cityofnewyork.us/", "instruction": "Click on 'Data'"},
 ]
 
-# Same injection script used by the capture pipeline: occlusion check +
-# full per-element metadata (id/tag/text/bbox/center), not just a count.
-SOM_INJECTION_SCRIPT = """
-() => {
-    const existing = document.querySelectorAll('.som-overlay-badge, .som-overlay-box');
-    existing.forEach(el => el.remove());
-
-    const interactiveSelectors = [
-        'button', 'a', 'input', 'select', 'textarea',
-        '[role="button"]', '[role="link"]', '[role="checkbox"]',
-        '[role="menuitem"]', '[role="tab"]', '[onclick]'
-    ];
-
-    const elements = Array.from(document.querySelectorAll(interactiveSelectors.join(',')));
-    const items = [];
-    let count = 0;
-
-    elements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.width < 12 || rect.height < 12) return;
-        if (rect.top < 0 || rect.top > window.innerHeight) return;
-        if (rect.left < 0 || rect.left > window.innerWidth) return;
-
-        const style = window.getComputedStyle(el);
-        if (style.visibility === 'hidden' || style.display === 'none' || style.opacity === '0') return;
-
-        const rawText = (el.innerText || el.getAttribute('placeholder') || el.getAttribute('aria-label') || el.getAttribute('title') || el.value || '').trim();
-        if (!rawText || rawText.length < 2 || rawText.length > 60) return;
-
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const topEl = document.elementFromPoint(cx, cy);
-        if (!topEl || (!el.contains(topEl) && !topEl.contains(el))) return;
-
-        count += 1;
-
-        const box = document.createElement('div');
-        box.className = 'som-overlay-box';
-        box.style.position = 'fixed';
-        box.style.left = `${rect.left}px`;
-        box.style.top = `${rect.top}px`;
-        box.style.width = `${rect.width}px`;
-        box.style.height = `${rect.height}px`;
-        box.style.border = '2px solid #00FF66';
-        box.style.backgroundColor = 'rgba(0, 255, 102, 0.08)';
-        box.style.pointerEvents = 'none';
-        box.style.zIndex = '999998';
-        document.body.appendChild(box);
-
-        const badge = document.createElement('div');
-        badge.className = 'som-overlay-badge';
-        badge.innerText = `[${count}]`;
-        badge.style.position = 'fixed';
-        badge.style.left = `${Math.max(0, rect.left)}px`;
-        badge.style.top = `${Math.max(0, rect.top - 18)}px`;
-        badge.style.backgroundColor = '#00FF66';
-        badge.style.color = '#000000';
-        badge.style.fontSize = '12px';
-        badge.style.fontWeight = 'bold';
-        badge.style.fontFamily = 'monospace';
-        badge.style.padding = '1px 4px';
-        badge.style.borderRadius = '3px';
-        badge.style.boxShadow = '0 0 4px rgba(0,0,0,0.8)';
-        badge.style.pointerEvents = 'none';
-        badge.style.zIndex = '999999';
-        document.body.appendChild(badge);
-
-        items.push({
-            id: count,
-            tag: el.tagName.toLowerCase(),
-            type: el.getAttribute('type') || null,
-            text: rawText.slice(0, 80),
-            role: el.getAttribute('role') || null,
-            bbox: {
-                x: Math.round(rect.left), y: Math.round(rect.top),
-                width: Math.round(rect.width), height: Math.round(rect.height)
-            },
-            center: { x: Math.round(cx), y: Math.round(cy) }
-        });
-    });
-
-    return items;
-}
-"""
-
-
-# --------------------------------------------------------------------------
-# Browser side: capture + optional action execution
-# --------------------------------------------------------------------------
-
-async def dismiss_consent_banners(page):
-    for selector in CONSENT_SELECTORS:
-        try:
-            await page.locator(selector).first.click(timeout=1200)
-            await page.wait_for_timeout(300)
-            return
-        except Exception:
-            continue
-
-
-async def load_and_tag(page, url: str, settle_ms: int) -> list:
-    await page.goto(url, wait_until="domcontentloaded", timeout=NAV_TIMEOUT_MS)
-    try:
-        await page.wait_for_load_state("networkidle", timeout=8000)
-    except Exception:
-        pass
-    await dismiss_consent_banners(page)
-    await page.wait_for_timeout(settle_ms)
-    return await page.evaluate(SOM_INJECTION_SCRIPT)
+# SOM_INJECTION_SCRIPT, dismiss_consent_banners, and load_and_tag now live in
+# som_common.py (imported above), so a live inference capture here is
+# guaranteed to use the exact same overlay marks the training data was built
+# with -- badge styling changes only need to happen in one place.
 
 
 async def capture_som(context, url: str, name: str):
@@ -196,6 +82,18 @@ async def capture_som(context, url: str, name: str):
     return screenshot_path, elements, page
 
 
+def page_state_fingerprint(elements: list) -> frozenset:
+    """A cheap signature of 'what's on the page right now', built from the
+    same (tag, text) pairs dedupe_ambiguous() uses to spot duplicates. Two
+    fingerprints being equal is a reasonable proxy for 'the click did not
+    change anything visible' -- new elements appearing (a dropdown opened,
+    a modal appeared, navigation happened) or existing ones disappearing
+    will change the set. It won't catch every kind of change (e.g. a value
+    updating inside an element that keeps the same tag+text), but it's a
+    cheap, generalizable signal that needs no per-instruction expectations."""
+    return frozenset((el["tag"], el["text"].strip().lower()) for el in elements)
+
+
 async def execute_action_on_page(page, element: dict, action: dict) -> dict:
     before_url = page.url
     cx, cy = element["center"]["x"], element["center"]["y"]
@@ -209,25 +107,134 @@ async def execute_action_on_page(page, element: dict, action: dict) -> dict:
         return {"executed": False, "error": str(e), "before_url": before_url, "after_url": page.url}
 
 
+async def get_input_value(page, element: dict) -> str | None:
+    """Read the current value of a form input via its DOM center point --
+    used to verify 'type' actions, since typing into a field rarely changes
+    the visible interactive-element set the way a click/navigation does."""
+    cx, cy = element["center"]["x"], element["center"]["y"]
+    try:
+        return await page.evaluate(
+            "([cx, cy]) => { const el = document.elementFromPoint(cx, cy); "
+            "return el ? (el.value ?? null) : null; }",
+            [cx, cy],
+        )
+    except Exception:
+        return None
+
+
+async def execute_with_verification(
+    page, image: Image.Image, instruction: str, elements: list,
+    model, processor, max_attempts: int = 3,
+) -> dict:
+    """Click (or type into) the model's top prediction, then verify it
+    actually did something before trusting it:
+      - action == 'type': re-read the input's value and check it now
+        contains what we typed. Typing rarely changes the visible element
+        set, so a DOM diff is the wrong check for this action type.
+      - action == 'click': if the URL changed, that's an immediate success
+        -- skip the DOM diff entirely, it's redundant once we already know
+        navigation happened. Otherwise fall back to comparing the visible
+        element set before/after (catches in-page changes like a dropdown
+        or modal opening that a URL check alone would miss).
+
+    On a miss, re-prompt the model with plain negative feedback naming the
+    element_id(s) that already failed and ask it to choose again.
+    max_attempts is TOTAL tries including the first -- default 3 means the
+    first attempt plus up to 2 retries, rather than anything logit-level.
+    """
+    before_state = page_state_fingerprint(elements)
+    before_url = page.url
+
+    tried_ids = []
+    attempts = []
+    current_instruction = instruction
+
+    for attempt_num in range(1, max_attempts + 1):
+        raw_output = predict(model, processor, image, current_instruction)
+        parsed = parse_action(raw_output)
+        matched = match_element(elements, parsed.get("element_id")) if parsed else None
+
+        attempt_record = {
+            "attempt": attempt_num,
+            "raw_output": raw_output,
+            "parsed_action": parsed,
+            "matched_element_text": matched["text"] if matched else None,
+        }
+
+        if not matched or not parsed:
+            attempt_record["outcome"] = "no_element_match"
+            attempts.append(attempt_record)
+            break  # can't click nothing -- no point retrying with the same unresolved output
+
+        is_type_action = parsed.get("action") == "type"
+        value_before = await get_input_value(page, matched) if is_type_action else None
+
+        tried_ids.append(parsed["element_id"])
+        exec_result = await execute_action_on_page(page, matched, parsed)
+        attempt_record["execution"] = exec_result
+
+        if not exec_result.get("executed"):
+            attempt_record["outcome"] = "execution_error"
+            attempts.append(attempt_record)
+            break  # a Playwright-level error (e.g. detached element) won't fix itself on retry
+
+        url_changed = exec_result["after_url"] != before_url
+        attempt_record["url_changed"] = url_changed
+
+        if url_changed:
+            # Fast path: navigation happened, that's a success on its own --
+            # no need to also diff the DOM.
+            attempt_record["outcome"] = "success"
+            attempts.append(attempt_record)
+            return {"success": True, "attempts": attempts, "final_matched_element_text": matched["text"]}
+
+        if is_type_action:
+            value_after = await get_input_value(page, matched)
+            typed_value = str(parsed.get("value", ""))
+            value_changed = bool(value_after) and value_after != value_before and (
+                typed_value == "" or typed_value.strip().lower() in value_after.strip().lower()
+            )
+            attempt_record["value_before"] = value_before
+            attempt_record["value_after"] = value_after
+            attempt_record["outcome"] = "success" if value_changed else "no_visible_change"
+            attempts.append(attempt_record)
+            if value_changed:
+                return {"success": True, "attempts": attempts, "final_matched_element_text": matched["text"]}
+        else:
+            after_elements = await page.evaluate(SOM_INJECTION_SCRIPT)
+            after_state = page_state_fingerprint(after_elements)
+            dom_changed = after_state != before_state
+            attempt_record["dom_changed"] = dom_changed
+            attempt_record["outcome"] = "success" if dom_changed else "no_visible_change"
+            attempts.append(attempt_record)
+            if dom_changed:
+                return {"success": True, "attempts": attempts, "final_matched_element_text": matched["text"]}
+
+        # No visible change -- plain re-prompt with negative feedback naming
+        # EVERY element_id tried so far (not just the most recent one), so
+        # the model can't cycle back to an earlier failed guess on the next
+        # attempt. No logit/token-level intervention, just prompt text.
+        failed_list = ", ".join(f"[{i}]" for i in tried_ids)
+        current_instruction = (
+            f"{instruction}\n\n"
+            f"(Clicking elements {failed_list} caused no page change. "
+            f"Choose a different element.)"
+        )
+
+    return {
+        "success": False,
+        "attempts": attempts,
+        "final_matched_element_text": None,
+    }
+
+
 # --------------------------------------------------------------------------
 # Model side
 # --------------------------------------------------------------------------
 
 def load_model():
     print("⏳ Loading processor and base model in 4-bit...")
-    # Must match train_som_qlora.py's BitsAndBytesConfig exactly. The adapter's
-    # weights were optimized against gradients computed with THIS quantization
-    # setup (vision/connector/lm_head excluded from 4-bit) -- evaluating with a
-    # different setup introduces a train/inference mismatch and confounds
-    # "is my model good". If you change this in train_som_qlora.py, change it
-    # here and in eval_offline.py too, in the same commit.
-    bnb_config = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_quant_type="nf4",
-        bnb_4bit_compute_dtype=torch.bfloat16,
-        bnb_4bit_use_double_quant=True,
-        llm_int8_skip_modules=["vision", "connector", "projector", "lm_head"],
-    )
+    bnb_config = get_bnb_config()  # shared with train_som_qlora.py -- see som_common.py
 
     processor = AutoProcessor.from_pretrained(MODEL_ID)
     if processor.tokenizer.pad_token is None:
@@ -281,8 +288,14 @@ def parse_action(raw_text: str) -> dict | None:
 
 
 def match_element(elements: list, element_id) -> dict | None:
+    """str() comparison, not ==: element_id is stored as an int (see
+    som_common.py's count += 1), but nothing guarantees the model always
+    emits element_id as a JSON integer rather than a string -- 4 == "4" is
+    False in Python, which would silently fail to match a perfectly valid
+    prediction. Comparing string forms sidesteps that without needing to
+    trust or validate the type the model happened to emit."""
     for el in elements:
-        if el["id"] == element_id:
+        if str(el["id"]) == str(element_id):
             return el
     return None
 
@@ -305,7 +318,7 @@ def annotate_prediction(screenshot_path: Path, element: dict | None, out_path: P
 # Orchestration
 # --------------------------------------------------------------------------
 
-async def run_all(test_cases: list, execute_action: bool):
+async def run_all(test_cases: list, execute_action: bool, max_attempts: int = 3):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     model, processor = load_model()
 
@@ -322,32 +335,57 @@ async def run_all(test_cases: list, execute_action: bool):
             print(f"  tagged {len(elements)} elements")
 
             image = Image.open(screenshot_path).convert("RGB")
-            raw_output = predict(model, processor, image, case["instruction"])
-            print(f"  model output: {raw_output}")
 
-            parsed = parse_action(raw_output)
-            matched = match_element(elements, parsed.get("element_id")) if parsed else None
+            if execute_action:
+                # Verified retry loop: click, check if anything visible
+                # changed, retry with a different guess if not.
+                outcome = await execute_with_verification(
+                    page, image, case["instruction"], elements, model, processor,
+                    max_attempts=max_attempts,
+                )
+                first_attempt = outcome["attempts"][0] if outcome["attempts"] else {}
+                raw_output = first_attempt.get("raw_output", "")
+                parsed = first_attempt.get("parsed_action")
+                matched = match_element(elements, parsed.get("element_id")) if parsed else None
 
-            annotate_prediction(screenshot_path, matched, OUTPUT_DIR / f"{name}_predicted.png")
+                print(f"  model output (attempt 1): {raw_output}")
+                for a in outcome["attempts"]:
+                    print(f"  attempt {a['attempt']}: {a.get('parsed_action')} -> {a['outcome']}")
+                print(f"  -> verified success: {outcome['success']}")
 
-            if matched:
-                print(f"  -> predicted element [{parsed['element_id']}]: '{matched['text']}'")
+                annotate_prediction(screenshot_path, matched, OUTPUT_DIR / f"{name}_predicted.png")
+
+                result = {
+                    "url": case["url"],
+                    "instruction": case["instruction"],
+                    "matched_element_text": matched["text"] if matched else None,
+                    "annotated_screenshot": str(OUTPUT_DIR / f"{name}_predicted.png"),
+                    "verified_success": outcome["success"],
+                    "attempts": outcome["attempts"],
+                }
             else:
-                print(f"  -> could not resolve element_id to a tagged element (parsed={parsed})")
+                # Print-only path, unchanged: single prediction, no clicking.
+                raw_output = predict(model, processor, image, case["instruction"])
+                print(f"  model output: {raw_output}")
 
-            result = {
-                "url": case["url"],
-                "instruction": case["instruction"],
-                "raw_output": raw_output,
-                "parsed_action": parsed,
-                "matched_element_text": matched["text"] if matched else None,
-                "annotated_screenshot": str(OUTPUT_DIR / f"{name}_predicted.png"),
-            }
+                parsed = parse_action(raw_output)
+                matched = match_element(elements, parsed.get("element_id")) if parsed else None
 
-            if execute_action and matched and parsed:
-                exec_result = await execute_action_on_page(page, matched, parsed)
-                result["execution"] = exec_result
-                print(f"  -> executed: {exec_result}")
+                annotate_prediction(screenshot_path, matched, OUTPUT_DIR / f"{name}_predicted.png")
+
+                if matched:
+                    print(f"  -> predicted element [{parsed['element_id']}]: '{matched['text']}'")
+                else:
+                    print(f"  -> could not resolve element_id to a tagged element (parsed={parsed})")
+
+                result = {
+                    "url": case["url"],
+                    "instruction": case["instruction"],
+                    "raw_output": raw_output,
+                    "parsed_action": parsed,
+                    "matched_element_text": matched["text"] if matched else None,
+                    "annotated_screenshot": str(OUTPUT_DIR / f"{name}_predicted.png"),
+                }
 
             await page.close()
             results.append(result)
@@ -359,19 +397,34 @@ async def run_all(test_cases: list, execute_action: bool):
         json.dump(results, f, indent=2)
     print(f"\nSaved {len(results)} case results -> {report_path}")
 
+    if execute_action:
+        verified = sum(1 for r in results if r.get("verified_success"))
+        total_attempts = sum(len(r.get("attempts", [])) for r in results)
+        print(f"\nVerified success: {verified}/{len(results)} cases "
+              f"({verified / len(results):.1%})  |  total attempts used: {total_attempts}")
+
 
 def main():
     parser = argparse.ArgumentParser(description="Run the fine-tuned SoM adapter against test sites")
     parser.add_argument("--execute", action="store_true", help="Actually click/type the predicted element via Playwright")
+    parser.add_argument("--max-attempts", type=int, default=3,
+                         help="With --execute, TOTAL tries per instruction including the first "
+                              "(default 3 = 1 attempt + up to 2 retries) if a click/type produced "
+                              "no verifiable change")
     parser.add_argument("--cases", type=Path, default=None, help="Optional JSON file: [{\"url\":..., \"instruction\":...}, ...]")
+    parser.add_argument("--adapter-path", type=str, default=None, help="Override adapter dir, e.g. to test a specific epoch checkpoint")
     args = parser.parse_args()
+
+    if args.adapter_path:
+        global ADAPTER_PATH
+        ADAPTER_PATH = args.adapter_path
 
     test_cases = TEST_CASES
     if args.cases:
         with open(args.cases) as f:
             test_cases = json.load(f)
 
-    asyncio.run(run_all(test_cases, execute_action=args.execute))
+    asyncio.run(run_all(test_cases, execute_action=args.execute, max_attempts=args.max_attempts))
 
 
 if __name__ == "__main__":

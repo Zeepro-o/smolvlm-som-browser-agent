@@ -39,3 +39,9 @@ HF_TOKEN*
 .DS_Store
 .vscode/
 *.swp
+
+vlm-env/
+bis-env/
+__pycache__/
+*.pyc
+

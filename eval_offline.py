@@ -44,21 +44,17 @@ from collections import defaultdict
 import torch
 from PIL import Image
 from peft import PeftModel
-from transformers import AutoProcessor, AutoModelForImageTextToText, BitsAndBytesConfig
+from transformers import AutoProcessor, AutoModelForImageTextToText
 
-MODEL_ID = "HuggingFaceTB/SmolVLM-Instruct"
-ADAPTER_PATH = "./som_smolvlm_lora_adapter"
+from som_common import MODEL_ID, DEFAULT_ADAPTER_PATH, get_bnb_config
+
+ADAPTER_PATH = DEFAULT_ADAPTER_PATH
 
 
-def load_model():
-    print("⏳ Loading processor and base model in 4-bit...")
-    bnb_config = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_quant_type="nf4",
-        bnb_4bit_compute_dtype=torch.bfloat16,
-        bnb_4bit_use_double_quant=True,
-        llm_int8_skip_modules=["vision", "connector", "projector", "lm_head"],
-    )  # must match train_som_qlora.py exactly -- see test_agent.py's load_model() for why
+def load_model(adapter_path: str = None):
+    adapter_path = adapter_path or ADAPTER_PATH
+    print(f"⏳ Loading processor and base model in 4-bit... (adapter: {adapter_path})")
+    bnb_config = get_bnb_config()  # shared with train_som_qlora.py -- see som_common.py
 
     processor = AutoProcessor.from_pretrained(MODEL_ID)
     if processor.tokenizer.pad_token is None:
@@ -67,7 +63,7 @@ def load_model():
     base_model = AutoModelForImageTextToText.from_pretrained(
         MODEL_ID, quantization_config=bnb_config, torch_dtype=torch.bfloat16, device_map="auto"
     )
-    model = PeftModel.from_pretrained(base_model, ADAPTER_PATH)
+    model = PeftModel.from_pretrained(base_model, adapter_path)
     model.eval()
     return model, processor
 
@@ -178,6 +174,10 @@ def main():
     parser = argparse.ArgumentParser(description="Score the fine-tuned adapter against a held-out labeled dataset")
     parser.add_argument("--data", type=Path, required=True, help="Path to a held-out train_dataset.jsonl-format file")
     parser.add_argument("--out", type=Path, default=Path("eval_offline_report.json"))
+    parser.add_argument("--adapter-path", type=str, default=None,
+                         help="Override adapter dir -- e.g. dataset_som_v3/checkpoint-116 to score a "
+                              "specific epoch instead of the final saved adapter. Useful for checking "
+                              "whether held-out accuracy is still climbing when training loss plateaus.")
     args = parser.parse_args()
 
     records = load_records(args.data)
@@ -188,7 +188,7 @@ def main():
     sites_in_eval = {r.get("site", "unknown") for r in records}
     print(f"Loaded {len(records)} held-out records from {len(sites_in_eval)} sites: {sorted(sites_in_eval)}")
 
-    model, processor = load_model()
+    model, processor = load_model(args.adapter_path)
 
     results = []
     for i, record in enumerate(records):

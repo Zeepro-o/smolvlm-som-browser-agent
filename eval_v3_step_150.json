@@ -1,0 +1,2464 @@
+{
+  "summary": {
+    "n": 96,
+    "json_valid_rate": 1.0,
+    "action_match_rate": 1.0,
+    "element_id_match_rate": 0.46875,
+    "coord_error_px_median": 200.57246024162885,
+    "coord_error_px_mean": 300.8872962009874,
+    "by_site": {
+      "cern_opendata": {
+        "n": 21,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.3333333333333333,
+        "action_match_rate": 1.0
+      },
+      "chicago_data": {
+        "n": 13,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.38461538461538464,
+        "action_match_rate": 1.0
+      },
+      "london_datastore": {
+        "n": 13,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.6923076923076923,
+        "action_match_rate": 1.0
+      },
+      "noaa_climate": {
+        "n": 15,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.4666666666666667,
+        "action_match_rate": 1.0
+      },
+      "nyc_opendata": {
+        "n": 12,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.5833333333333334,
+        "action_match_rate": 1.0
+      },
+      "protein_data_bank": {
+        "n": 22,
+        "json_valid_rate": 1.0,
+        "element_id_match_rate": 0.45454545454545453,
+        "action_match_rate": 1.0
+      }
+    }
+  },
+  "results": [
+    {
+      "site": "cern_opendata",
+      "instruction": "Tap 'Data Science'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 20, \"coordinate\": {\"x\": 100, \"y\": 632}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 20,
+        "coordinate": {
+          "x": 916,
+          "y": 773
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 20,
+        "coordinate": {
+          "x": 100,
+          "y": 632
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 828.092386150241
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'Get started'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1, \"coordinate\": {\"x\": 112, \"y\": 602}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 21,
+        "coordinate": {
+          "x": 640,
+          "y": 792
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 112,
+          "y": 602
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 561.145257486865
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Click on 'Search'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 6, \"coordinate\": {\"x\": 958, \"y\": 272}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3,
+        "coordinate": {
+          "x": 1193,
+          "y": 301
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 6,
+        "coordinate": {
+          "x": 958,
+          "y": 272
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 236.78260071213003
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'collision datasets'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 4, \"coordinate\": {\"x\": 418, \"y\": 372}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 591,
+          "y": 353
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 418,
+          "y": 372
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 174.04022523543227
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Press the 'keywords:education' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 5, \"coordinate\": {\"x\": 448, \"y\": 322}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5,
+        "coordinate": {
+          "x": 715,
+          "y": 353
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 5,
+        "coordinate": {
+          "x": 448,
+          "y": 322
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 268.79360111431225
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'JADE'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 18, \"coordinate\": {\"x\": 448, \"y\": 632}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 15,
+        "coordinate": {
+          "x": 917,
+          "y": 634
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 18,
+        "coordinate": {
+          "x": 448,
+          "y": 632
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 469.00426437293726
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'ALICE'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17, \"coordinate\": {\"x\": 608, \"y\": 592}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 11,
+        "coordinate": {
+          "x": 917,
+          "y": 522
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17,
+        "coordinate": {
+          "x": 608,
+          "y": 592
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 316.8296072023573
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Tap 'OPERA'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 19, \"coordinate\": {\"x\": 1000, \"y\": 700}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 17,
+        "coordinate": {
+          "x": 916,
+          "y": 690
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 19,
+        "coordinate": {
+          "x": 1000,
+          "y": 700
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 84.5931439302264
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'Login'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1, \"coordinate\": {\"x\": 100, \"y\": 20}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 1084,
+          "y": 33
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 100,
+          "y": 20
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 984.0858702369422
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'documentation'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 338, \"y\": 572}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 364,
+          "y": 606
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 338,
+          "y": 572
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 42.80186911806539
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'TOTEM'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17, \"coordinate\": {\"x\": 608, \"y\": 592}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 19,
+        "coordinate": {
+          "x": 916,
+          "y": 745
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17,
+        "coordinate": {
+          "x": 608,
+          "y": 592
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 343.9084180417804
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Tap 'PHENIX'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 19, \"coordinate\": {\"x\": 1000, \"y\": 700}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 18,
+        "coordinate": {
+          "x": 916,
+          "y": 717
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 19,
+        "coordinate": {
+          "x": 1000,
+          "y": 700
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 85.70297544426332
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'datasets'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 4, \"coordinate\": {\"x\": 448, \"y\": 402}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7,
+        "coordinate": {
+          "x": 363,
+          "y": 522
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 448,
+          "y": 402
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 147.05441169852742
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Search using 'search'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 2, \"value\": \"renewable energy statistics\", \"coordinate\": {\"x\": 328, \"y\": 382}}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 2,
+        "value": "climate change",
+        "coordinate": {
+          "x": 585,
+          "y": 301
+        }
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 2,
+        "value": "renewable energy statistics",
+        "coordinate": {
+          "x": 328,
+          "y": 382
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 269.462427807663
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Click on 'DELPHI'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17, \"coordinate\": {\"x\": 608, \"y\": 572}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 14,
+        "coordinate": {
+          "x": 916,
+          "y": 606
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17,
+        "coordinate": {
+          "x": 608,
+          "y": 572
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 309.87094087700444
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'LHCb'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 17, \"coordinate\": {\"x\": 608, \"y\": 592}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 16,
+        "coordinate": {
+          "x": 917,
+          "y": 662
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 17,
+        "coordinate": {
+          "x": 608,
+          "y": 592
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 316.8296072023573
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Tap 'CMS'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 112, \"y\": 632}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 917,
+          "y": 578
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 112,
+          "y": 632
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 806.8091471965349
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'software'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8, \"coordinate\": {\"x\": 338, \"y\": 592}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 364,
+          "y": 550
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 338,
+          "y": 592
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 49.39635614091387
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Select 'energy:7TeV'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 7, \"coordinate\": {\"x\": 320, \"y\": 580}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6,
+        "coordinate": {
+          "x": 825,
+          "y": 353
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 7,
+        "coordinate": {
+          "x": 320,
+          "y": 580
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 553.6731888036479
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Choose 'ATLAS'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 19, \"coordinate\": {\"x\": 1000, \"y\": 700}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12,
+        "coordinate": {
+          "x": 917,
+          "y": 550
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 19,
+        "coordinate": {
+          "x": 1000,
+          "y": 700
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 171.4322023425004
+    },
+    {
+      "site": "cern_opendata",
+      "instruction": "Click on 'environments'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 338, \"y\": 632}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 363,
+          "y": 578
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 338,
+          "y": 632
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 59.506302187247364
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Choose 'Sign In'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 9, \"coordinate\": {\"x\": 1128, \"y\": 28}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 1240,
+          "y": 43
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 1128,
+          "y": 28
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 113.0
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Click on 'Feedback'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 4, \"coordinate\": {\"x\": 1068, \"y\": 28}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 962,
+          "y": 43
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 1068,
+          "y": 28
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 107.05606008068857
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Choose 'Github'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 738, \"y\": 622}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5,
+        "coordinate": {
+          "x": 1052,
+          "y": 43
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 738,
+          "y": 622
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 658.6630398010807
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Type into 'Search to find a specific dataset...'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 31, \"value\": \"renewable energy statistics\", \"coordinate\": {\"x\": 668, \"y\": 602}}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 13,
+        "value": "biodiversity dataset",
+        "coordinate": {
+          "x": 617,
+          "y": 697
+        }
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 31,
+        "value": "renewable energy statistics",
+        "coordinate": {
+          "x": 668,
+          "y": 602
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 107.82393055347222
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Choose 'search'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 21, \"coordinate\": {\"x\": 1068, \"y\": 572}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 1173,
+          "y": 43
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 21,
+        "coordinate": {
+          "x": 1068,
+          "y": 572
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 539.3199421493701
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Tap 'Chicago Data Portal'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1, \"coordinate\": {\"x\": 100, \"y\": 100}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 211,
+          "y": 43
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 124.77980605851253
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Select 'X Profile'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 798, \"y\": 622}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6,
+        "coordinate": {
+          "x": 1088,
+          "y": 43
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 798,
+          "y": 622
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 647.5654407085048
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Press the 'Tutorial' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13, \"coordinate\": {\"x\": 728, \"y\": 28}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3,
+        "coordinate": {
+          "x": 888,
+          "y": 43
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 728,
+          "y": 28
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 160.70158679988197
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Click on 'NEXT'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 1068, \"y\": 632}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12,
+        "coordinate": {
+          "x": 1252,
+          "y": 362
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 1068,
+          "y": 632
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 326.7353669255901
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Click on 'Pause carousel'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 708, \"y\": 622}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 640,
+          "y": 597
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 708,
+          "y": 622
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 72.44998274671983
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Tap 'YouTube Profile'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 1108, \"y\": 572}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7,
+        "coordinate": {
+          "x": 1124,
+          "y": 43
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 1108,
+          "y": 572
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 529.2419106609
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Choose 'Browse'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 2, \"coordinate\": {\"x\": 756, \"y\": 28}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 2,
+        "coordinate": {
+          "x": 820,
+          "y": 43
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 2,
+        "coordinate": {
+          "x": 756,
+          "y": 28
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 65.73431371817918
+    },
+    {
+      "site": "chicago_data",
+      "instruction": "Click on 'PREVIOUS'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 448, \"y\": 622}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 11,
+        "coordinate": {
+          "x": 28,
+          "y": 362
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 448,
+          "y": 622
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 493.9635614091388
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Tap 'People'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 4, \"coordinate\": {\"x\": 119, \"y\": 100}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 160,
+          "y": 92
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 119,
+          "y": 100
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 41.773197148410844
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Select 'Set cookie preferences'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 1108, \"y\": 10}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 40,
+          "y": 760
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 1108,
+          "y": 10
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 1305.0379304832484
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Blog'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 9, \"coordinate\": {\"x\": 728, \"y\": 102}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 691,
+          "y": 92
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 728,
+          "y": 102
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 38.3275357934736
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Choose 'Go to login'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 11, \"coordinate\": {\"x\": 1108, \"y\": 22}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 2,
+        "coordinate": {
+          "x": 1230,
+          "y": 28
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 11,
+        "coordinate": {
+          "x": 1108,
+          "y": 22
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 122.14745187681976
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Choose 'Pause ticker'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13, \"coordinate\": {\"x\": 119, \"y\": 562}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 43,
+          "y": 365
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 119,
+          "y": 562
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 211.15160430363773
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Press the 'About' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 738, \"y\": 22}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 771,
+          "y": 92
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 738,
+          "y": 22
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 77.38862965578342
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Area Profiles'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8, \"coordinate\": {\"x\": 608, \"y\": 104}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 591,
+          "y": 92
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 608,
+          "y": 104
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 20.808652046684813
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Data'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 3, \"coordinate\": {\"x\": 112, \"y\": 100}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3,
+        "coordinate": {
+          "x": 70,
+          "y": 92
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 3,
+        "coordinate": {
+          "x": 112,
+          "y": 100
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 42.7551166528639
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Search using 'Search...'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 11, \"value\": \"renewable energy statistics\", \"coordinate\": {\"x\": 1096, \"y\": 22}}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 11,
+        "value": "Earth observation data",
+        "coordinate": {
+          "x": 1143,
+          "y": 91
+        }
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 11,
+        "value": "renewable energy statistics",
+        "coordinate": {
+          "x": 1096,
+          "y": 22
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 83.48652585896721
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Tap 'Places'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 5, \"coordinate\": {\"x\": 268, \"y\": 102}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6,
+        "coordinate": {
+          "x": 373,
+          "y": 92
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 5,
+        "coordinate": {
+          "x": 268,
+          "y": 102
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 105.47511554864494
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Choose 'Show popup'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 1096, \"y\": 22}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12,
+        "coordinate": {
+          "x": 1232,
+          "y": 91
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 1096,
+          "y": 22
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 152.50245899656832
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Economy'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 5, \"coordinate\": {\"x\": 368, \"y\": 242}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5,
+        "coordinate": {
+          "x": 268,
+          "y": 92
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 5,
+        "coordinate": {
+          "x": 368,
+          "y": 242
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 180.27756377319946
+    },
+    {
+      "site": "london_datastore",
+      "instruction": "Click on 'Insights'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 7, \"coordinate\": {\"x\": 418, \"y\": 104}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7,
+        "coordinate": {
+          "x": 476,
+          "y": 92
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 7,
+        "coordinate": {
+          "x": 418,
+          "y": 104
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 59.22837157984339
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Click on 'National Oceanic and Atmospheric Administration'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8, \"coordinate\": {\"x\": 308, \"y\": 382}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7,
+        "coordinate": {
+          "x": 333,
+          "y": 114
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 308,
+          "y": 382
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 269.1635190734435
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Select 'Here\u2019s how you know'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1, \"coordinate\": {\"x\": 100, \"y\": 22}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 576,
+          "y": 12
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 100,
+          "y": 22
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 476.10503042921107
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Tap 'Help improve this site'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 15, \"coordinate\": {\"x\": 1108, \"y\": 727}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 15,
+        "coordinate": {
+          "x": 1143,
+          "y": 770
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 15,
+        "coordinate": {
+          "x": 1108,
+          "y": 727
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 55.44366510251645
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Choose 'News and stories'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13, \"coordinate\": {\"x\": 896, \"y\": 577}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 14,
+        "coordinate": {
+          "x": 1093,
+          "y": 709
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 896,
+          "y": 577
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 237.1349826575573
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Choose 'Tools'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13, \"coordinate\": {\"x\": 848, \"y\": 577}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 1106,
+          "y": 49
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 848,
+          "y": 577
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 587.6631688305811
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Tap 'Funding opportunities'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 12, \"coordinate\": {\"x\": 728, \"y\": 622}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12,
+        "coordinate": {
+          "x": 673,
+          "y": 709
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 12,
+        "coordinate": {
+          "x": 728,
+          "y": 622
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 102.9271587094485
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Select 'News'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 14, \"coordinate\": {\"x\": 848, \"y\": 632}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 2,
+        "coordinate": {
+          "x": 968,
+          "y": 49
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 14,
+        "coordinate": {
+          "x": 848,
+          "y": 632
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 595.2218073962008
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Select 'Collaborations and partnerships'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 11, \"coordinate\": {\"x\": 328, \"y\": 622}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 11,
+        "coordinate": {
+          "x": 463,
+          "y": 720
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 11,
+        "coordinate": {
+          "x": 328,
+          "y": 622
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 166.82026255823962
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Press the 'Tools and resources' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13, \"coordinate\": {\"x\": 848, \"y\": 572}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 883,
+          "y": 709
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 848,
+          "y": 572
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 141.40014144264495
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Press the 'U.S. Department of Commerce' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8, \"coordinate\": {\"x\": 300, \"y\": 372}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 333,
+          "y": 150
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 300,
+          "y": 372
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 224.43930137121706
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Enter a search query into 'Search NOAA sites'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 9, \"value\": \"climate change\", \"coordinate\": {\"x\": 1008, \"y\": 200}}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 9,
+        "value": "biodiversity dataset",
+        "coordinate": {
+          "x": 998,
+          "y": 126
+        }
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 9,
+        "value": "climate change",
+        "coordinate": {
+          "x": 1008,
+          "y": 200
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 74.67261881037788
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Tap 'Data'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13, \"coordinate\": {\"x\": 932, \"y\": 572}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3,
+        "coordinate": {
+          "x": 1038,
+          "y": 49
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 932,
+          "y": 572
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 533.6337695461186
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Enter a search query into 'Search'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 9, \"value\": \"renewable energy statistics\", \"coordinate\": {\"x\": 1068, \"y\": 200}}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 10,
+        "value": "biodiversity dataset",
+        "coordinate": {
+          "x": 1183,
+          "y": 128
+        }
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 9,
+        "value": "renewable energy statistics",
+        "coordinate": {
+          "x": 1068,
+          "y": 200
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 135.67977004697494
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Choose 'National Oceanic and Atmospheric Administration home'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8, \"coordinate\": {\"x\": 298, \"y\": 382}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6,
+        "coordinate": {
+          "x": 185,
+          "y": 125
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 298,
+          "y": 382
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 280.74543629416314
+    },
+    {
+      "site": "noaa_climate",
+      "instruction": "Press the 'About' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 1128, \"y\": 322}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5,
+        "coordinate": {
+          "x": 1180,
+          "y": 49
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 1128,
+          "y": 322
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 277.90825824361536
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Click on 'Search all NYC.gov websites'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 11, \"coordinate\": {\"x\": 468, \"y\": 622}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 2,
+        "coordinate": {
+          "x": 1109,
+          "y": 14
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 11,
+        "coordinate": {
+          "x": 468,
+          "y": 622
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 883.4845782468418
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Type into 'Search Open Data for things like 311, Buildings, Trees'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 11, \"value\": \"renewable energy data\", \"coordinate\": {\"x\": 668, \"y\": 622}}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 11,
+        "value": "climate change",
+        "coordinate": {
+          "x": 407,
+          "y": 559
+        }
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 11,
+        "value": "renewable energy data",
+        "coordinate": {
+          "x": 668,
+          "y": 622
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 268.49581002317336
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Tap 'Learn'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 6, \"coordinate\": {\"x\": 1098, \"y\": 102}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 6,
+        "coordinate": {
+          "x": 933,
+          "y": 110
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 6,
+        "coordinate": {
+          "x": 1098,
+          "y": 102
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 165.19382555047267
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Select 'sign up for the NYC Open Data mailing list'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 9, \"coordinate\": {\"x\": 448, \"y\": 472}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 404,
+          "y": 434
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 448,
+          "y": 472
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 58.137767414994535
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Select 'Attend a training class'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 9, \"coordinate\": {\"x\": 418, \"y\": 472}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 515,
+          "y": 416
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 418,
+          "y": 472
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 112.0044641967453
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Tap 'Data'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 4, \"coordinate\": {\"x\": 728, \"y\": 28}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 735,
+          "y": 110
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 4,
+        "coordinate": {
+          "x": 728,
+          "y": 28
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 82.29823813423954
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Click on 'Sign In'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 7, \"coordinate\": {\"x\": 1098, \"y\": 22}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 1165,
+          "y": 110
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 7,
+        "coordinate": {
+          "x": 1098,
+          "y": 22
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 110.60289327137876
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Choose 'About'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 12, \"coordinate\": {\"x\": 1008, \"y\": 592}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 5,
+        "coordinate": {
+          "x": 828,
+          "y": 110
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 12,
+        "coordinate": {
+          "x": 1008,
+          "y": 592
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 514.5133623143329
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Choose 'Home'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 3, \"coordinate\": {\"x\": 100, \"y\": 100}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 3,
+        "coordinate": {
+          "x": 652,
+          "y": 110
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 3,
+        "coordinate": {
+          "x": 100,
+          "y": 100
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 552.0905722795853
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Select 'Watch recordings from 2026 and past Open Data Weeks'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 12, \"coordinate\": {\"x\": 1068, \"y\": 622}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12,
+        "coordinate": {
+          "x": 980,
+          "y": 451
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 12,
+        "coordinate": {
+          "x": 1068,
+          "y": 622
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 192.31484602078956
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Tap 'Contact Us'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 7, \"coordinate\": {\"x\": 1098, \"y\": 102}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 7,
+        "coordinate": {
+          "x": 1050,
+          "y": 110
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 7,
+        "coordinate": {
+          "x": 1098,
+          "y": 102
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 48.662100242385755
+    },
+    {
+      "site": "nyc_opendata",
+      "instruction": "Choose '311'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 10, \"coordinate\": {\"x\": 322, \"y\": 472}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 993,
+          "y": 14
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 322,
+          "y": 472
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 812.4069177450424
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'Computed Structure Models (CSM)'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 14, \"coordinate\": {\"x\": 448, \"y\": 282}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 32,
+        "coordinate": {
+          "x": 410,
+          "y": 460
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 14,
+        "coordinate": {
+          "x": 448,
+          "y": 282
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 182.0109886792553
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Search using 'Enter search term(s), Ligand ID or sequence'",
+      "raw_output": "{\"action\": \"type\", \"element_id\": 15, \"value\": \"ligand id or sequence\", \"coordinate\": {\"x\": 728, \"y\": 180}}",
+      "ground_truth": {
+        "action": "type",
+        "element_id": 15,
+        "value": "renewable energy statistics",
+        "coordinate": {
+          "x": 820,
+          "y": 99
+        }
+      },
+      "predicted": {
+        "action": "type",
+        "element_id": 15,
+        "value": "ligand id or sequence",
+        "coordinate": {
+          "x": 728,
+          "y": 180
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 122.57650672131263
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Tap 'PDB Beta Archive'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 21, \"coordinate\": {\"x\": 100, \"y\": 500}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 21,
+        "coordinate": {
+          "x": 673,
+          "y": 247
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 21,
+        "coordinate": {
+          "x": 100,
+          "y": 500
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 626.3689008882865
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'Publications'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 35, \"coordinate\": {\"x\": 1068, \"y\": 727}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 36,
+        "coordinate": {
+          "x": 979,
+          "y": 776
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 35,
+        "coordinate": {
+          "x": 1068,
+          "y": 727
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 101.59724405711013
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Tap 'Advanced Search'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 18, \"coordinate\": {\"x\": 1008, \"y\": 322}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 17,
+        "coordinate": {
+          "x": 597,
+          "y": 136
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 18,
+        "coordinate": {
+          "x": 1008,
+          "y": 322
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 451.1285847737871
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'COVID-19'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13, \"coordinate\": {\"x\": 300, \"y\": 322}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 10,
+        "coordinate": {
+          "x": 863,
+          "y": 28
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 300,
+          "y": 322
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 635.1417164696395
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'Integrative 3D Structures'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 24, \"coordinate\": {\"x\": 112, \"y\": 472}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 31,
+        "coordinate": {
+          "x": 375,
+          "y": 420
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 24,
+        "coordinate": {
+          "x": 112,
+          "y": 472
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 268.09140232390894
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'Browse Annotations'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 18, \"coordinate\": {\"x\": 1008, \"y\": 322}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 19,
+        "coordinate": {
+          "x": 809,
+          "y": 136
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 18,
+        "coordinate": {
+          "x": 1008,
+          "y": 322
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 272.3912627086265
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'RCSB PDB'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 1, \"coordinate\": {\"x\": 100, \"y\": 10}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 71,
+          "y": 28
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 1,
+        "coordinate": {
+          "x": 100,
+          "y": 10
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 34.132096331752024
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Tap '259,129'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 25, \"coordinate\": {\"x\": 100, \"y\": 580}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 282,
+          "y": 86
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 25,
+        "coordinate": {
+          "x": 100,
+          "y": 580
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 526.4598750142312
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Press the '1,062,058' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 14, \"coordinate\": {\"x\": 308, \"y\": 208}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 14,
+        "coordinate": {
+          "x": 433,
+          "y": 86
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 14,
+        "coordinate": {
+          "x": 308,
+          "y": 208
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 174.6682569902156
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'News'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 26, \"coordinate\": {\"x\": 116, \"y\": 562}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 35,
+        "coordinate": {
+          "x": 883,
+          "y": 778
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 26,
+        "coordinate": {
+          "x": 116,
+          "y": 562
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 796.8343617088811
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Press the 'Wed Aug 26 2026' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 13, \"coordinate\": {\"x\": 300, \"y\": 624}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 34,
+        "coordinate": {
+          "x": 361,
+          "y": 776
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 13,
+        "coordinate": {
+          "x": 300,
+          "y": 624
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 163.783393541592
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Tap 'Include\u00a0 CSM'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 16, \"coordinate\": {\"x\": 1108, \"y\": 302}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 16,
+        "coordinate": {
+          "x": 1157,
+          "y": 99
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 16,
+        "coordinate": {
+          "x": 1108,
+          "y": 302
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 208.83007446246816
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'MyPDB'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 29, \"coordinate\": {\"x\": 119, \"y\": 472}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 12,
+        "coordinate": {
+          "x": 1228,
+          "y": 28
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 29,
+        "coordinate": {
+          "x": 119,
+          "y": 472
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 1194.5781682250852
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Press the 'Chemical Search' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 18, \"coordinate\": {\"x\": 1008, \"y\": 322}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 18,
+        "coordinate": {
+          "x": 700,
+          "y": 136
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 18,
+        "coordinate": {
+          "x": 1008,
+          "y": 322
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 359.8055030151707
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Click on 'About'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 8, \"coordinate\": {\"x\": 788, \"y\": 22}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 708,
+          "y": 28
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 8,
+        "coordinate": {
+          "x": 788,
+          "y": 22
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 80.22468448052632
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'Careers'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 9, \"coordinate\": {\"x\": 1068, \"y\": 11}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 782,
+          "y": 28
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 9,
+        "coordinate": {
+          "x": 1068,
+          "y": 11
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 286.50479926172267
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Choose 'Histone Ubiquitination and Deubiquitination Complexes'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 33, \"coordinate\": {\"x\": 1000, \"y\": 632}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 33,
+        "coordinate": {
+          "x": 1041,
+          "y": 703
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 33,
+        "coordinate": {
+          "x": 1000,
+          "y": 632
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 81.98780397107853
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Choose 'RCSB Protein Data Bank (RCSB PDB)'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 22, \"coordinate\": {\"x\": 112, \"y\": 322}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 29,
+        "coordinate": {
+          "x": 378,
+          "y": 295
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 22,
+        "coordinate": {
+          "x": 112,
+          "y": 322
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 267.36678926149375
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Press the 'Protein Data Bank (PDB)' button",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 22, \"coordinate\": {\"x\": 119, \"y\": 322}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 30,
+        "coordinate": {
+          "x": 709,
+          "y": 357
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 22,
+        "coordinate": {
+          "x": 119,
+          "y": 322
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": false,
+      "coord_error_px": 591.0372238700368
+    },
+    {
+      "site": "protein_data_bank",
+      "instruction": "Select 'Welcome'",
+      "raw_output": "{\"action\": \"click\", \"element_id\": 22, \"coordinate\": {\"x\": 100, \"y\": 300}}",
+      "ground_truth": {
+        "action": "click",
+        "element_id": 22,
+        "coordinate": {
+          "x": 118,
+          "y": 328
+        }
+      },
+      "predicted": {
+        "action": "click",
+        "element_id": 22,
+        "coordinate": {
+          "x": 100,
+          "y": 300
+        }
+      },
+      "json_valid": true,
+      "action_match": true,
+      "element_id_match": true,
+      "coord_error_px": 33.28663395418648
+    }
+  ]
+}
